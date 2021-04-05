@@ -1,0 +1,333 @@
+<html>
+
+<head>
+	<meta name="viewport" content="initial-scale=1.0, width=device-width">
+	<meta charset="utf-8">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--on-surface-faded: gray;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			:root {
+				--on-surface-faded: darkgray;
+			}
+		}
+
+		*,
+		*::before,
+		*::after {
+			margin: 0;
+			border: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: 'Roboto', sans-serif;
+		}
+
+		a {
+			color: black;
+			text-decoration: none;
+		}
+
+		@media (prefers-color-scheme: dark) {
+
+			*,
+			a {
+				color: white;
+			}
+
+			body {
+				background: #121212;
+			}
+		}
+
+		.main {
+			position: relative;
+			max-width: 500px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		.main::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			border: 1px rgba(0, 0, 0, 0.1) solid;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			.main::before {
+				border: 1px rgba(255, 255, 255, 0.1) solid;
+			}
+		}
+
+		.main-header {
+			padding: 8px;
+		}
+
+		.post,
+		.main-header {
+			position: relative;
+		}
+
+		.post::before,
+		.main-header::before {
+			pointer-events: none;
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+		}
+
+		@media (hover: hover) and (pointer: fine) {
+
+			.post:not(.primary-post):hover::before,
+			.main-header:hover::before {
+				background: rgba(0, 0, 0, 0.1);
+			}
+
+		}
+
+		.main-header::before,
+		.post.post-unconnected-down::before {
+			border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+		}
+
+		@media (prefers-color-scheme: dark) {
+
+			@media (hover: hover) and (pointer: fine) {
+
+				.post:not(.primary-post):hover::before,
+				.main-header:hover::before {
+					background: rgba(255, 255, 255, 0.1);
+				}
+
+			}
+
+			.main-header::before,
+			.post.post-unconnected-down::before {
+				border-bottom: 1px rgba(255, 255, 255, 0.1) solid;
+			}
+
+		}
+
+		.post-branch {
+			width: 24px;
+			flex: none;
+			box-sizing: border-box;
+			border: 0px solid;
+			border-top-width: 23;
+			border-image-source: url(static/no-branch.svg);
+			border-image-slice: 23 0 0 fill;
+		}
+
+		.post-branch-collapse-expand {
+			border-image-source: url(static/branch-collapse.svg);
+		}
+
+		.post-branch-collapse-expand+div::before {
+			content: '접기';
+		}
+
+		.collapsed>div>.post-branch-collapse-expand {
+			border-image-source: url(static/branch-expand.svg);
+		}
+
+		.collapsed>div>.post-branch-collapse-expand+div::before {
+			content: '펼치기';
+		}
+
+		.collapsed>div:last-child {
+			display: none;
+		}
+
+		.post-branch-collapse {
+			border-image-source: url(static/branch-collapse.svg);
+		}
+
+		.post-branch-up {
+			border-image-source: url(static/branch-up.svg);
+		}
+
+		.post-branch-down {
+			border-image-source: url(static/branch-down.svg);
+		}
+
+		.post-branch-all {
+			border-image-source: url(static/branch-all.svg);
+		}
+
+		@media (prefers-color-scheme: dark) {
+
+			.post-branch {
+				border-image-source: url(static/no-branch-dark.svg);
+			}
+
+			.post-branch-collapse {
+				border-image-source: url(static/branch-collapse-dark.svg);
+			}
+
+			.post-branch-up {
+				border-image-source: url(static/branch-up-dark.svg);
+			}
+
+			.post-branch-down {
+				border-image-source: url(static/branch-down-dark.svg);
+			}
+
+			.post-branch-all {
+				border-image-source: url(static/branch-all-dark.svg);
+			}
+
+		}
+
+		.post-body {
+			flex: 1;
+			padding: 4px;
+			padding-left: 0px;
+			overflow: hidden;
+		}
+
+		.post-author {
+			font-weight: 700;
+		}
+
+		.post-date {
+			margin-left: 4px;
+			color: var(--on-surface-faded);
+		}
+
+		.post-content {
+			word-break: break-all;
+		}
+
+		.post-link {
+			color: #00897b;
+			text-decoration: underline;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			.post-link {
+				color: #03dac5;
+			}
+		}
+
+		.post-menu {
+			color: var(--on-surface-faded);
+		}
+
+		.blueberry {
+			margin-top: 50px;
+			width: 50px;
+			max-width: 100%;
+		}
+
+		.post-form {
+			position: fixed;
+			bottom: 0;
+			padding: 4px;
+			width: 100%;
+			max-width: inherit;
+			background: white;
+		}
+
+		.post-form::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			border: 1px rgba(0, 0, 0, 0.1) solid;
+			pointer-events: none;
+		}
+
+		@media (prefers-color-scheme: dark) {
+
+			input,
+			textarea,
+			.post-form {
+				background: #121212;
+			}
+
+			.post-form::after {
+				border: 1px rgba(255, 255, 255, 0.1) solid;
+			}
+		}
+
+		input[type=text],
+		input[type=password],
+		textarea {
+			margin: 4px;
+			padding: 4px;
+			font-size: 1.1em;
+			min-width: 0;
+		}
+
+		input[type=submit] {
+			margin: 4px;
+			padding: 6px 8px 6px 8px;
+			font-size: 1.2em;
+			font-weight: 700;
+			color: white;
+			background: #813dfd;
+			border-radius: 4px;
+		}
+
+		@media (prefers-color-scheme: dark) {
+			input[type=submit] {
+				color: black;
+				background: #bb86fc;
+			}
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+	<script>
+		window.addEventListener('DOMContentLoaded', function () {
+			const author = window.Cookies.get('author');
+			const password = window.Cookies.get('password');
+			if (author !== undefined) {
+				const author_elem = document.getElementById('author-field');
+				author_elem.value = decodeURI(author);
+			}
+			if (password !== undefined) {
+				const password_elem = document.getElementById('password-field');
+				password_elem.value = decodeURI(password);
+			}
+		});
+	</script>
+</head>
+
+<body>
+	<div class="main">
+		<a href="/" class="main-header" style="display: block">홈으로</a>
+		<?php
+				include 'render_post_page.php';
+			?>
+		<div style="height: 100%; display: flex; justify-content: center; align-items: start;">
+			<img class="blueberry" src="static/blueberry-mutated.png">
+		</div>
+		<form class="post-form" action="write_post.php" method="POST">
+			<?php
+					echo '<input name="parent" type="hidden" value="' . $_GET['id'] . '">';
+				?>
+			<div style="display: flex">
+				<input id="author-field" name="author" type="text" placeholder="이름" style="flex: 1" required>
+				<input id="password-field" name="password" type="password" placeholder="비밀번호" style="flex: 1" required>
+			</div>
+			<div style="display: flex">
+				<textarea name="content" placeholder="내용" style="flex: 1" required></textarea>
+			</div>
+			<input type="submit" value="답글 작성" style="float: right">
+		</form>
+	</div>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:version="1.0.2 (1.0.2+r75+1)"
+   id="svg913"
+   version="1.1"
+   viewBox="0 0 6.3499999 6.3500002"
+   height="24"
+   width="24"
+   sodipodi:docname="branch-all-dark.svg">
+  <defs
+     id="defs907" />
+  <sodipodi:namedview
+     units="px"
+     showgrid="true"
+     inkscape:document-rotation="0"
+     inkscape:current-layer="layer1"
+     inkscape:document-units="px"
+     inkscape:cy="13.523991"
+     inkscape:cx="12.259795"
+     inkscape:zoom="22.4"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     borderopacity="1.0"
+     bordercolor="#666666"
+     pagecolor="#ffffff"
+     id="base"
+     inkscape:window-width="1920"
+     inkscape:window-height="1004"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid830" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata910">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer1"
+     inkscape:groupmode="layer"
+     inkscape:label="레이어 1">
+    <path
+       id="path838"
+       style="fill:#bb86fc;stroke-width:0;stroke-miterlimit:1;stop-color:#000000;fill-opacity:1"
+       d="M 11 0 L 11 8.1289062 A 4.0000002 4.0000002 0 0 0 8 12 A 4.0000002 4.0000002 0 0 0 11 15.871094 L 11 24 L 13 24 L 13 15.873047 A 4.0000002 4.0000002 0 0 0 16 12 A 4.0000002 4.0000002 0 0 0 13 8.1289062 L 13 0 L 11 0 z M 11.949219 10 A 2.0000001 2.0000001 0 0 1 11.951172 10 A 2.0000001 2.0000001 0 0 1 12 10 A 2.0000001 2.0000001 0 0 1 14 12 A 2.0000001 2.0000001 0 0 1 12 14 A 2.0000001 2.0000001 0 0 1 10 12 A 2.0000001 2.0000001 0 0 1 11.949219 10 z "
+       transform="scale(0.26458334)" />
+  </g>
+</svg>
