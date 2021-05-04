@@ -15,7 +15,7 @@ function get_children_recur($conn, $id, $parent_depth = 0) {
 		$id,
 	);
 	$children = array();
-	while ($child = mysqli_fetch_array($children_result)) {
+	while ($child = mysqli_fetch_assoc($children_result)) {
 		$child['timestamp'] = time_to_str(strtotime($child['timestamp']));
 		if ($my_depth < 2) {
 			$child['children'] = get_children_recur($conn, $child['id'], $my_depth);

@@ -14,7 +14,7 @@ $id = $_GET['id'];
 
 include_once '../get_stmt_result.php';
 
-$post = mysqli_fetch_array(get_stmt_result(
+$post = mysqli_fetch_assoc(get_stmt_result(
 	$conn,
 	<<<SQL
 	SELECT id, parent, author, content, timestamp
