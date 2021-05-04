@@ -4,16 +4,17 @@ include_once 'get_post_branch_class_by_connection.php';
 include_once 'time_to_str.php';
 include_once 'linkify.php';
 
-function render_secondary_post($post, $n_children, $parent_author, $icu, $icd) {
+function render_secondary_post($post, $n_children, $depth, $connect_up, $connect_down) {
 	echo
 		'<a href="post.html?id=' . $post['id'] . '#post">' .
-			'<div class="post ' . ($icd ? '' : 'post-unconnected-down') . '" style="display: flex;">' .
-				'<div class="post-branch ' . (get_post_branch_class_by_connection($icu, $icd)) . '">' .
+			'<div class="post" style="display: flex;">' .
+				str_repeat('<span style="width: 18px;"></span>', $depth) .
+				'<div class="post-branch ' . get_post_branch_class_by_connection($connect_up, $connect_down) . '">' .
 				'</div>' .
 				'<div class="post-body">' .
 					'<div class="post-head">' .
 						'<span class="post-author">' .
-							htmlspecialchars($post['author']) . (false && isset($parent_author) ? '→' . htmlspecialchars($parent_author) : '') .
+							htmlspecialchars($post['author']) .
 						'</span>' .
 						'<span class="post-date">' .
 							time_to_str(strtotime($post['timestamp'])) .
@@ -23,12 +24,11 @@ function render_secondary_post($post, $n_children, $parent_author, $icu, $icd) {
 						linkify_deco_only(nl2br(htmlspecialchars($post['content']))) .
 					'</div>' .
 					'<div class="post-menu">' .
-						($n_children > 0 ? '답글 ' . $post['n_descendants'] : '') .
+						($n_children > 0 ? '답글 ' . $n_children . ' · 대화 ' . $post['n_descendants'] : '') .
 					'</div>' .
 				'</div>' .
 			'</div>' .
 		'</a>';
-
 }
 
 ?>

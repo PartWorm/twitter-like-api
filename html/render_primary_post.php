@@ -21,7 +21,7 @@ function render_primary_post($post, $n_children, $parent_author, $icu, $icd) {
 					linkify(nl2br(htmlspecialchars($post['content']))) .
 				'</div>' .
 				'<div class="post-menu">' .
-					($n_children > 0 ? '답글 ' . $post['n_descendants'] : '') .
+					($n_children > 0 ? '답글 ' . $n_children . ' · 대화 ' . $post['n_descendants'] : '') .
 					// ⤷⋔
 				'</div>' .
 			'</div>' .

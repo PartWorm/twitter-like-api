@@ -66,6 +66,23 @@
 			}
 		}
 
+		.tag {
+			display: inline-block;
+			margin-right: 8px;
+			padding: 8px;
+			border: 1px rgba(0, 0, 0, 0.1) solid;
+		}
+
+		.tag::before {
+			content: '#';
+		}
+
+		@media (prefers-color-scheme: dark) {
+			.tag {
+				border: 1px rgba(255, 255, 255, 0.1) solid;
+			}
+		}
+
 		.main-header {
 			padding: 8px;
 		}
@@ -83,6 +100,7 @@
 			top: 0;
 			width: 100%;
 			height: 100%;
+			pointer-events: none;
 		}
 
 		@media (hover: hover) and (pointer: fine) {
@@ -208,6 +226,10 @@
 			max-width: 100%;
 		}
 
+		.form-toggle {
+			position: fixed;
+		}
+
 		.post-form {
 			position: fixed;
 			bottom: 0;
@@ -287,6 +309,12 @@
 
 <body>
 	<div class="main">
+		<div class="main-header">
+			<a href="/"><div class="tag">전체</div></a><?php include 'render_tag_list.php'; ?>
+		</div>
+		<div class="main-header">
+			<?php echo '#' . ($_GET['tag'] ?? '전체'); ?>
+		</div>
 		<a href=".">
 			<div class="main-header">새로고침</div>
 		</a>
@@ -296,8 +324,12 @@
 		<div style="height: 100%; display: flex; justify-content: center; align-items: start;">
 			<img class="blueberry" src="static/blueberry-mutated.png">
 		</div>
+		<input class="form-toggle" type="button" value="Toggle form">
 		<form class="post-form" action="write_post.php" method="POST">
 			<input name="parent" type="hidden" value="null">
+			<?php
+				echo '<input name="tag" type="hidden" value="' . $_GET['tag'] . '">';
+			?>
 			<div style="display: flex">
 				<input id="author-field" name="author" type="text" placeholder="이름" style="flex: 1" required>
 				<input id="password-field" name="password" type="password" placeholder="비밀번호" style="flex: 1" required>
