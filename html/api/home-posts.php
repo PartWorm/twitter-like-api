@@ -14,20 +14,11 @@ $tag = $_GET['tag'];
 
 include_once '../get_stmt_result.php';
 
-/*
-echo json_encode(array(array(
-	'author' => '',
-	'timestamp' => '',
-	'content' => $_SERVER['REQUEST_URI'],
-	'children' => array(),
-)));
-*/
-
 if (is_null($tag)) {
 	$posts_result = mysqli_query(
 		$conn,
 		<<<SQL
-		SELECT id, author, content, timestamp
+		SELECT id, author, content, timestamp, n_children, n_descendants
 		FROM posts
 		WHERE parent IS NULL ORDER BY id DESC
 		SQL,
@@ -37,7 +28,7 @@ else {
 	$posts_result = get_stmt_result(
 		$conn,
 		<<<SQL
-		SELECT posts.id, posts.author, posts.content, posts.timestamp
+		SELECT posts.id, posts.author, posts.content, posts.timestamp, posts.n_children, posts.n_descendants
 		FROM posts
 		JOIN post_tag ON posts.id = post_tag.post_id
 		JOIN tags ON post_tag.tag_id = tags.id
@@ -51,13 +42,13 @@ else {
 
 $posts = array();
 
-include_once '../time_to_str.php';
+include_once '../to_relative_time.php';
 include_once '../get_stmt_result.php';
-include_once '../get_children_recur.php';
+include_once '../read_children_or_thread.php';
 
 while ($post = mysqli_fetch_assoc($posts_result)) {
-	$post['timestamp'] = time_to_str(strtotime($post['timestamp']));
-	$post['children'] = get_children_recur($conn, $post['id']);
+	$post['timestamp'] = to_relative_time(strtotime($post['timestamp']));
+	read_children_or_thread($conn, $post);
 	$posts[] = $post;
 }
 

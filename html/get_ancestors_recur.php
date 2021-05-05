@@ -4,7 +4,7 @@ function get_ancestors_recur($conn, $id) {
 	$ancestors = array();
 	while (!is_null($id)) {
 		$parent = mysqli_fetch_assoc(get_stmt_result($conn, <<<SQL
-			SELECT id, parent, author, content, timestamp
+			SELECT id, parent, author, content, timestamp, n_children, n_descendants
 			FROM posts
 			WHERE id = ?
 			SQL,
@@ -15,7 +15,7 @@ function get_ancestors_recur($conn, $id) {
 			http_response_code(404);
 			die();
 		}
-		$parent['timestamp'] = time_to_str(strtotime($parent['timestamp']));
+		$parent['timestamp'] = to_relative_time(strtotime($parent['timestamp']));
 		$ancestors[] = $parent;
 		$id = $parent['parent'];
 	}

@@ -1,6 +1,6 @@
 <?php
 
-function time_to_str($time) {
+function to_relative_time($time) {
 	$now = time();
 	$diff = $now - $time;
 

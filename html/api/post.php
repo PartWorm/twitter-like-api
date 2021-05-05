@@ -17,7 +17,7 @@ include_once '../get_stmt_result.php';
 $post = mysqli_fetch_assoc(get_stmt_result(
 	$conn,
 	<<<SQL
-	SELECT id, parent, author, content, timestamp
+	SELECT id, parent, author, content, timestamp, n_children, n_descendants
 	FROM posts
 	WHERE id = ?
 	SQL,
@@ -30,13 +30,13 @@ if (is_null($post)) {
 	die();
 }
 
-include_once '../time_to_str.php';
+include_once '../to_relative_time.php';
 include_once '../get_ancestors_recur.php';
-include_once '../get_children_recur.php';
+include_once '../read_children_or_thread.php';
 
 $post['ancestors'] = get_ancestors_recur($conn, $post['parent']);
-$post['timestamp'] = time_to_str(strtotime($post['timestamp']));
-$post['children'] = get_children_recur($conn, $post['id']);
+$post['timestamp'] = to_relative_time(strtotime($post['timestamp']));
+read_children_or_thread($conn, $post);
 
 echo json_encode($post);
 

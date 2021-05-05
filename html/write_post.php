@@ -32,28 +32,22 @@ else {
 	) > 0 && $parent > 0;
 }
 
-
-
 if (empty($author) or empty($password) or empty($content)) {
 }
 else if ($parent_exists || is_null($parent)) {
 	setcookie('author', $author, time() + 365 * 24 * 60 * 60);
 	setcookie('password', $password, time() + 365 * 24 * 60 * 60);
-
 	include_once 'execute_stmt.php';
-
 	execute_stmt(
 		$conn,
 		'INSERT INTO posts (parent, author, password, content) VALUES (?, ?, ?, ?)',
 		'ssss', $parent, $author, $password, $content,
 	);
-
-	include_once 'update_n_descendants.php';
-	update_n_descendants($conn, $parent);
+	include_once 'update_relations_count.php';
+	update_relations_count($conn, $parent);
 }
 
 $prev_page = $_SERVER['HTTP_REFERER'];
-
 header('location:' . $prev_page . ($parent !== NULL ? '#post' : ''));
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 include_once 'get_post_branch_class_by_connection.php';
-include_once 'time_to_str.php';
+include_once 'to_relative_time.php';
 include_once 'linkify.php';
 
 function render_secondary_post($post, $n_children, $depth, $connect_up, $connect_down) {
@@ -17,7 +17,7 @@ function render_secondary_post($post, $n_children, $depth, $connect_up, $connect
 							htmlspecialchars($post['author']) .
 						'</span>' .
 						'<span class="post-date">' .
-							time_to_str(strtotime($post['timestamp'])) .
+							to_relative_time(strtotime($post['timestamp'])) .
 						'</span>' .
 					'</div>' .
 					'<div class="post-content">' .
