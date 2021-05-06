@@ -11,6 +11,17 @@ $conn = mysqli_connect(
 mysqli_set_charset($conn, 'utf8');
 
 $id = $_GET['id'];
+$sort_by = $_GET['sort-by'];
+
+if ($sort_by == 'hot') {
+	$order_by = 'n_descendants DESC';
+}
+else if ($sort_by == 'old') {
+	$order_by = 'timestamp ASC';
+}
+else {
+	$order_by = 'timestamp DESC';
+}
 
 include_once '../get_stmt_result.php';
 
@@ -36,7 +47,7 @@ include_once '../read_children_or_thread.php';
 
 $post['ancestors'] = get_ancestors_recur($conn, $post['parent']);
 $post['timestamp'] = to_relative_time(strtotime($post['timestamp']));
-read_children_or_thread($conn, $post);
+read_children_or_thread($conn, $post, $order_by);
 
 echo json_encode($post);
 

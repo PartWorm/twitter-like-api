@@ -48,7 +48,7 @@ include_once '../read_children_or_thread.php';
 
 while ($post = mysqli_fetch_assoc($posts_result)) {
 	$post['timestamp'] = to_relative_time(strtotime($post['timestamp']));
-	read_children_or_thread($conn, $post);
+	read_children_or_thread($conn, $post, 'n_descendants DESC');
 	$posts[] = $post;
 }
 
