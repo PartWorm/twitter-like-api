@@ -2,12 +2,15 @@
 
 include_once 'get_important_child.php';
 
+
 function read_children_or_thread($conn, &$post, $order_by, $depth = 1) {
-	if ($depth >= 5) {
+	$read_thread_depth = 3;
+	if ($depth >= $read_thread_depth + 1) {
 		return;
 	}
-	if ($depth < 4) {
-		$children_result = get_stmt_result($conn, <<<SQL
+	if ($depth < $read_thread_depth) {
+		$children_result = get_stmt_result(
+			$conn, <<<SQL
 			SELECT id, author, content, timestamp, n_children, n_descendants
 			FROM posts
 			WHERE parent = ?

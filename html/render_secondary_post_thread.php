@@ -33,7 +33,7 @@ function render_secondary_post_tree($conn, $post, $depth = 0) {
 
 	include_once 'render_secondary_post.php';
 
-	if ($depth < 2) {
+	if ($depth < 4) {
 		render_secondary_post($post, $n_children, $depth, false, false);
 
 		$replies = get_stmt_result(
